@@ -16,4 +16,8 @@ export class DashboardComponent implements OnInit {
     if(!this.uiService.checkLoggedIn()) this.router.navigate(['issue-tracker/login']);
   }
 
+  signOut() {
+    localStorage.removeItem('loggedin')
+    this.router.navigate(['/']);
+  }
 }

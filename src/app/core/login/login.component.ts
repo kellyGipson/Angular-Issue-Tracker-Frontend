@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class LoginComponent implements OnInit {
   email!: string;
   password!: string;
+  passwordType: string = "password";
+  showOrHide: string = "Show";
 
   constructor(private authService: AuthService) { }
 
@@ -22,6 +24,11 @@ export class LoginComponent implements OnInit {
     }
 
     this.authService.login(userData);
+  }
+
+  hidePassword() {
+    this.passwordType = (this.passwordType === "password") ? "text" : "password";
+    this.showOrHide = (this.passwordType === "password") ? "Show" : "Hide";
   }
 
 }

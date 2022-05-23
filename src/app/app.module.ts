@@ -11,9 +11,9 @@ import { LoginComponent } from './core/login/login.component';
 import { DashboardComponent } from './core/dashboard/dashboard.component';
 import { RegisterComponent } from './core/register/register.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
-import { IssuesComponent } from './core/issues/issues.component';
-import { GroupComponent } from './core/group/group.component';
-import { ProfileComponent } from './core/profile/profile.component';
+import { IssuesComponent } from './core/dashboard/components/issues/issues.component';
+import { GroupComponent } from './core/dashboard/components/group/group.component';
+import { ProfileComponent } from './core/dashboard/components/profile/profile.component';
 
 @NgModule({
   declarations: [
