@@ -1,1 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body, html {
+  width: 100vw;
+}
+
+html {
+  background-color: #eee;
+}
+
+#navIcon > svg {
+  height: 2rem;
+  width: 2rem;
+}
