@@ -10,32 +10,32 @@ import { RegisterComponent } from './core/register/register.component';
 
 const routes: Routes = [
   {
-    path: 'task-tracker',
+    path: 'issue-tracker',
     component: DashboardComponent,
   },
   {
-    path: 'task-tracker/login',
+    path: 'issue-tracker/login',
     component: LoginComponent,
   },
   {
-    path: 'task-tracker/register',
+    path: 'issue-tracker/register',
     component: RegisterComponent,
   },
   {
-    path: 'task-tracker/issues',
+    path: 'issue-tracker/issues',
     component: IssuesComponent,
   },
   {
-    path: 'task-tracker/group',
+    path: 'issue-tracker/group',
     component: GroupComponent,
   },
   {
-    path: 'task-tracker/profile',
+    path: 'issue-tracker/profile',
     component: ProfileComponent,
   },
   {
     path: '',
-    redirectTo: '/task-tracker',
+    redirectTo: '/issue-tracker',
     pathMatch: 'full',
   },
   {
