@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http'
-
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './shared/nav-menu/nav-menu.component';
 import { NavItemComponent } from './shared/nav-menu/components/nav-item/nav-item.component';
@@ -12,9 +12,9 @@ import { LoginComponent } from './core/login/login.component';
 import { DashboardComponent } from './core/dashboard/dashboard.component';
 import { RegisterComponent } from './core/register/register.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
-import { IssuesComponent } from './core/dashboard/components/issues/issues.component';
-import { GroupComponent } from './core/dashboard/components/group/group.component';
-import { ProfileComponent } from './core/dashboard/components/profile/profile.component';
+import { IssuesComponent } from './core/issues/issues.component';
+import { GroupComponent } from './core/group/group.component';
+import { ProfileComponent } from './core/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { ProfileComponent } from './core/dashboard/components/profile/profile.co
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
