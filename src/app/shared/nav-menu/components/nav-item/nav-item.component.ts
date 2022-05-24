@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IconDefinition, faHouseChimneyUser, faTicket, faLayerGroup, faUser } from '@fortawesome/free-solid-svg-icons';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-item',
@@ -12,7 +13,7 @@ export class NavItemComponent implements OnInit {
   @Input() name!: string;
   @Output() onClickFn = new EventEmitter();
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
@@ -28,7 +29,20 @@ export class NavItemComponent implements OnInit {
     }
   }
 
-  onClick() {
-    this.onClickFn.emit();
+  navigateTo(name: string) {
+    switch(name) {
+      case "Home": {
+        if(!this.router.url.includes(name)) this.router.navigate(['/']); break;
+      }
+      case "Issues": {
+        if(!this.router.url.includes(name)) this.router.navigate([`issue-tracker/${name.toLowerCase()}`]); break;
+      }
+      case "Group": {
+        if(!this.router.url.includes(name)) this.router.navigate([`issue-tracker/${name.toLowerCase()}`]); break;
+      }
+      case "Profile": {
+        if(!this.router.url.includes(name)) this.router.navigate([`issue-tracker/${name.toLowerCase()}`]); break;
+      }
+    }
   }
 }

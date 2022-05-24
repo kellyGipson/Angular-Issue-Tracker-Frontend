@@ -1,3 +1,8 @@
+export interface ILocalStorageUser {
+  id: number,
+  firstName: string,
+}
+
 export interface ILoginUser {
   email: string,
   password: string,

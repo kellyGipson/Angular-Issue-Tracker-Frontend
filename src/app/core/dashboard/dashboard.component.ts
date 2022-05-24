@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { UiService } from 'src/app/services/ui/ui.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ILocalStorageUser, IUser } from 'src/app/interfaces/USER';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,14 +14,23 @@ export class DashboardComponent implements OnInit {
 
   firstName!: string;
 
-  constructor(private uiService: UiService, private authService: AuthService, private router: Router) { }
+  constructor(
+    private uiService: UiService,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     if(!this.uiService.checkLoggedIn()) {
       this.router.navigate(['issue-tracker/login']);
       return;
     }
-    this.authService.currentFirstName.subscribe(name => this.firstName = name);
+    const localData = localStorage.getItem('loggedin');
+    let localParsed: ILocalStorageUser;
+    if(localData !== null){
+      localParsed = JSON.parse(localData)
+      this.authService.getFirstName(localParsed.id).subscribe(firstName => this.firstName = firstName)
+    }
   }
 
   signOut() {

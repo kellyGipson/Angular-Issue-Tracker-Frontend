@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { ILoginUser, IUser } from 'src/app/interfaces/USER';
 import { apiUrl, httpOptions } from 'src/app/interfaces/API';
@@ -19,6 +19,14 @@ export class AuthService {
   currentFirstName = this.firstName.asObservable();
 
   constructor(private router: Router, private http: HttpClient) {}
+
+  getFirstName(id: number): Observable<string> {
+    this.http.get<IUser>(`${apiUrl}/users/${id}`)
+    .forEach(user => {
+      this.firstName.next(user.firstName)
+    });
+    return this.firstName;
+  }
 
   setFirstName(firstName: string) {
     this.firstName.next(firstName);
