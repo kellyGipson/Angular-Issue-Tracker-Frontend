@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { USER } from 'src/app/interfaces/USER';
+import { IRegUser } from 'src/app/interfaces/USER';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UiService } from 'src/app/services/ui/ui.service';
@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     if(this.password === null || this.password === undefined) throw new Error('no password');
     if(!this.authService.pwHasSpecialCharacters(this.password)) throw new Error('password has no special characters');
 
-    const userData: USER = {
+    const userData = {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,

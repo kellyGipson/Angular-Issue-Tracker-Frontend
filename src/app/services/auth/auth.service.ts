@@ -1,50 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import { BehaviorSubject } from 'rxjs';
 
-import { USER } from 'src/app/interfaces/USER';
+import { ILoginUser, IUser } from 'src/app/interfaces/USER';
+import { apiUrl, httpOptions } from 'src/app/interfaces/API';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   specialChars: string = "!@#$%^&*";
-  userData!: USER | null;
+  userData!: {};
+  users!: IUser[];
 
-  firstName: BehaviorSubject<string> = new BehaviorSubject<string>(this.getFirstName());
+  firstName: BehaviorSubject<string> = new BehaviorSubject<string>("");
   currentFirstName = this.firstName.asObservable();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private http: HttpClient) {}
 
-  getFirstName() {
-    const userDataJson = localStorage.getItem('userData');
-    let userDataParsed;
-    if(userDataJson === null) {
-      return ""
-    } else {
-      userDataParsed = JSON.parse(userDataJson);
-    }
-    return userDataParsed.username;
+  setFirstName(firstName: string) {
+    this.firstName.next(firstName);
   }
 
-  login(userData: { email: string, password: string }) {
+  login(userData: ILoginUser) {
     // reach out to db, verify login info and set a flag in localstorage to stay logged in
-    const userDataJson = localStorage.getItem('userData');
-    if(userDataJson === null || userDataJson === undefined) return;
-
-    const userDataParsed = JSON.parse(userDataJson);
-    if(userData.email !== userDataParsed.email) throw new Error('email is not recognized');
-    if(userData.password !== userDataParsed.password) throw new Error('Email and password do not match.');
-
-    localStorage.setItem('loggedin', 'true');
-    this.router.navigate(['/']);
+    this.http.get<IUser[]>(`${apiUrl}/users`)
+      .forEach(users => { // grab the users from the observable
+        users.forEach(user => { // iterate through the users
+          if(user.email.toLowerCase() === userData.email.toLowerCase()) {
+            if(user.password === userData.password) {
+              this.firstName.next(user.firstName);
+              localStorage.setItem('loggedin', JSON.stringify({ id: user.id, firstName: user.firstName }));
+              this.router.navigate(['/']);
+            } else {
+              throw new Error("email and password doesn't match");
+            }
+          } else {
+            throw new Error('no email matched');
+          }
+        });
+      });
   }
 
-  register(userData: USER) {
+  register(userData:any) {
     // reach out to db, create a user and set a flag in localstorage to stay logged in
-    localStorage.setItem('userData', JSON.stringify(userData))
-    localStorage.setItem('loggedin', 'true');
+    this.http.post(`${apiUrl}/users`, userData, httpOptions).subscribe(result => this.userData = result);
+    this.firstName.next(userData.firstName);
+    localStorage.setItem('loggedin', userData.id.toString());
     this.router.navigate(['/']);
   }
 
