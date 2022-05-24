@@ -9,7 +9,7 @@ This Web App was created to serve as a hub for a company's internal issues/ticke
 
 The Issue Tracker was created to:
 - Learn Angular
-- Add to my portfolio (here)[https://kellygipson.dev]
+- Add to my portfolio [here](https://kellygipson.dev)
 
 ## Current Features:
 - Functional login and register pages
