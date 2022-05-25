@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { IRegUser } from 'src/app/interfaces/USER';
 
@@ -25,8 +25,6 @@ export class RegisterComponent implements OnInit {
   errorPassword!: boolean;
   errorSpecialCharacters!: boolean;
   errorMessage!: string | null;
-
-  @Output() onRegisterForParent: EventEmitter<String[]> = new EventEmitter<String[]>();
 
   constructor(private authService: AuthService, private router: Router) { }
 

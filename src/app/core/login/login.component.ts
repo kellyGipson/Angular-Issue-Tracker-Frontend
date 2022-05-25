@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   email!: string;
   password!: string;
   passwordType: string = "password";
@@ -21,6 +21,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.errorMessage$.subscribe(msg => this.errorMessage = msg);
+  }
+
+  ngOnDestroy(): void {
+    this.authService.errorMessage$.subscribe().unsubscribe();
   }
 
   onLogin() {
