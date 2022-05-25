@@ -20,5 +20,7 @@ export class NavMenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  addOnClick() { // Nav Item onClick Fn
 
+  }
 }

@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 
 import { ILoginUser, IUser } from 'src/app/interfaces/USER';
 import { apiUrl, httpOptions } from 'src/app/interfaces/API';
+import { ReadVarExpr } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,9 @@ export class AuthService {
   users!: IUser[];
 
   // Observables
+  userIdSource: BehaviorSubject<number> = new BehaviorSubject<number>(this.getId());
+  userId$ = this.userIdSource.asObservable();
+
   firstNameSource: BehaviorSubject<string> = new BehaviorSubject<string>("");
   firstName$ = this.firstNameSource.asObservable();
 
@@ -23,6 +27,16 @@ export class AuthService {
   errorMessage$ = this.errorMessageSource.asObservable();
 
   constructor(private router: Router, private http: HttpClient) {}
+
+  getId(): number {
+    const userDataJson = localStorage.getItem('loggedin');
+    if(userDataJson !== null) {
+      const userDataParsed = JSON.parse(userDataJson);
+      console.log(userDataParsed.id)
+      return userDataParsed.id
+    }
+    return -1;
+  }
 
   getFirstName(id: number): Observable<string> {
     this.http.get<IUser>(`${apiUrl}/users/${id}`)

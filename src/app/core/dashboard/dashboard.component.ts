@@ -21,20 +21,21 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(!this.uiService.checkLoggedIn()) {
-      this.router.navigate(['issue-tracker/login']);
-      return;
-    }
+    if(!this.uiService.checkLoggedIn()) { this.router.navigate(['issue-tracker/login']); return; }
+    this.getFirstName();
+  }
+
+  signOut() {
+    localStorage.removeItem('loggedin')
+    this.router.navigate(['/issue-tracker/login']);
+  }
+
+  getFirstName() {
     const localData = localStorage.getItem('loggedin');
     let localParsed: ILocalStorageUser;
     if(localData !== null){
       localParsed = JSON.parse(localData)
       this.authService.getFirstName(localParsed.id).subscribe(firstName => this.firstName = firstName)
     }
-  }
-
-  signOut() {
-    localStorage.removeItem('loggedin')
-    this.router.navigate(['/issue-tracker/login']);
   }
 }

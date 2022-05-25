@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -7,11 +8,21 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 export class UiService {
   private userIsLoggedIn: boolean = localStorage.getItem('loggedin') !== null;
   private subject = new Subject<boolean>();
-  private activeNavItemSource = new BehaviorSubject<string>("Home");
 
+  private activeNavItemSource = new BehaviorSubject<string>(this.getActiveNavItem());
   activeNavItem = this.activeNavItemSource.asObservable();
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  getActiveNavItem():string {
+    switch(window.location.pathname) {
+      case "/issue-tracker": return "Home";
+      case "/issue-tracker/issues": return "Issues";
+      case "/issue-tracker/group": return "Group";
+      case "/issue-tracker/profile": return "Profile";
+    }
+    return "Home"; // Failsafe
+  }
 
   setActiveNavItem(navItem: "Home" | "Issues" | "Group" | "Profile") {
     console.log(navItem);
