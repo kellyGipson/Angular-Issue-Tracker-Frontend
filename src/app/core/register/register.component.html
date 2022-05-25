@@ -1,46 +1,62 @@
+<div *ngIf="(errorMessage)" class="fixed flex h-16 w-screen justify-center items-center text-xl text-white mt-[8vh] z-10">
+  <div class="flex flex-row items-center h-16 bg-red-300 p-4">
+    <h2 class="">Error</h2>
+  </div>
+  <div class="flex flex-row items-center h-16 bg-red-400 p-4">
+    <p class="">{{errorMessage}}</p>
+  </div>
+</div>
 <div class="h-screen w-screen flex flex-col justify-center items-center text-neutral-400 text-lg">
   <a routerLink="/issue-tracker/login" class= "text-black underline underline-offset-1 fixed top-0 right-0 mt-4 mr-4">Login</a>
   <form (ngSubmit)="onRegister()" class="rounded-md p-4 bg-white w-screen xs:w-[350px]">
     <h1 class="text-center text-2xl text-neutral-500 mb-8">Register</h1>
-    <div class="flex flex-col border-b-2">
+    <div class="flex flex-col border-b-2 {{errorFirstName && 'text-red-400 border-red-400'}}">
       <label for="firstName">First Name</label>
       <input
+        (click)="resetErrors()"
         class="focus-visible:outline-none"
         [(ngModel)]="firstName"
-        type="firstName"
+        type="text"
         name="firstName"
         id="firstName"
+        required
       >
     </div>
-    <div class="flex flex-col border-b-2 mt-4">
+    <div class="flex flex-col border-b-2 mt-4 {{errorLastName && 'text-red-400 border-red-400'}}">
       <label for="lastName">Last Name</label>
       <input
+        (click)="resetErrors()"
         class="focus-visible:outline-none"
         [(ngModel)]="lastName"
-        type="lastName"
+        type="text"
         name="lastName"
         id="lastName"
+        required
       >
     </div>
-    <div class="flex flex-col border-b-2 mt-4">
+    <div class="flex flex-col border-b-2 mt-4 {{errorEmail && 'text-red-400 border-red-400'}}">
       <label for="email">Email Address</label>
       <input
+        (click)="resetErrors()"
         class="focus-visible:outline-none"
         [(ngModel)]="email"
         type="email"
         name="email"
         id="email"
+        required
       >
     </div>
-    <div class="flex flex-col border-b-2 mt-4">
+    <div class="flex flex-col border-b-2 mt-4 {{errorPassword && 'text-red-400 border-red-400'}}">
       <label for="password">Password</label>
       <div class="text-right">
         <input
-        class="focus-visible:outline-none w-[17rem]"
-        [(ngModel)]="password"
-        type="{{passwordType}}"
-        name="password"
-        id="password"
+          (click)="resetErrors()"
+          class="focus-visible:outline-none w-[17rem]"
+          [(ngModel)]="password"
+          type="{{passwordType}}"
+          name="password"
+          id="password"
+          required
         >
         <a (click)="hidePassword()" class="underline underline-offset-1 select-none active:scale-95">{{showOrHide}}</a>
       </div>

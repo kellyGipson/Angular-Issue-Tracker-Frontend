@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
@@ -11,19 +12,31 @@ export class LoginComponent implements OnInit {
   password!: string;
   passwordType: string = "password";
   showOrHide: string = "Show";
+  errorEmail: boolean = false;
+  errorPassword: boolean = false;
+  errorEmailAndPassword: boolean = false;
+  errorMessage!: string | null;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.errorMessage$.subscribe(msg => this.errorMessage = msg);
   }
 
   onLogin() {
-    const userData = {
-      email: this.email,
-      password: this.password,
+    try {
+      if((this.password === undefined || this.password === "") && (this.email === undefined || this.email === "")) throw new Error('Email and Password fields are required.');
+      if(this.email === undefined || this.email === "") throw new Error('Email field is required.');
+      if(this.password === undefined || this.password === "") throw new Error('Password field is required.');
+      const userData = {
+        email: this.email,
+        password: this.password,
+      }
+      this.authService.login(userData);
     }
-
-    this.authService.login(userData);
+    catch(e: any) {
+      this.handleErrors(e);
+    }
   }
 
   hidePassword() {
@@ -31,4 +44,30 @@ export class LoginComponent implements OnInit {
     this.showOrHide = (this.passwordType === "password") ? "Show" : "Hide";
   }
 
+  handleErrors(e: any) {
+    switch(e.message) {
+      case "Email and Password fields are required.": {
+        this.errorEmail = true;
+        this.errorPassword = true;
+        console.log(this.errorMessage)
+        break;
+      }
+      case "Email field is required.": {
+        this.errorEmail = true;
+        break;
+      }
+      case "Password field is required.": {
+        this.errorPassword = true;
+        break;
+      }
+    }
+    this.errorMessage = e.message;
+  }
+
+  resetErrors() {
+    this.errorEmail = false;
+    this.errorPassword = false;
+    this.errorEmailAndPassword = false;
+    this.errorMessage = null;
+  }
 }

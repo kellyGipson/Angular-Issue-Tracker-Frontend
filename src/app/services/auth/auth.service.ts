@@ -15,48 +15,52 @@ export class AuthService {
   userData!: {};
   users!: IUser[];
 
-  firstName: BehaviorSubject<string> = new BehaviorSubject<string>("");
-  currentFirstName = this.firstName.asObservable();
+  // Observables
+  firstNameSource: BehaviorSubject<string> = new BehaviorSubject<string>("");
+  firstName$ = this.firstNameSource.asObservable();
+
+  errorMessageSource: BehaviorSubject<string> = new BehaviorSubject<string>("");
+  errorMessage$ = this.errorMessageSource.asObservable();
 
   constructor(private router: Router, private http: HttpClient) {}
 
   getFirstName(id: number): Observable<string> {
     this.http.get<IUser>(`${apiUrl}/users/${id}`)
     .forEach(user => {
-      this.firstName.next(user.firstName)
+      this.firstNameSource.next(user.firstName)
     });
-    return this.firstName;
+    return this.firstNameSource;
   }
 
   setFirstName(firstName: string) {
-    this.firstName.next(firstName);
+    this.firstNameSource.next(firstName);
   }
 
-  login(userData: ILoginUser) {
+  login(userData: ILoginUser): void {
     // reach out to db, verify login info and set a flag in localstorage to stay logged in
     this.http.get<IUser[]>(`${apiUrl}/users`)
       .forEach(users => { // grab the users from the observable
         users.forEach(user => { // iterate through the users
-          if(user.email.toLowerCase() === userData.email.toLowerCase()) {
+          if(user.email === userData.email.toLowerCase()) {
             if(user.password === userData.password) {
-              this.firstName.next(user.firstName);
+              this.firstNameSource.next(user.firstName);
               localStorage.setItem('loggedin', JSON.stringify({ id: user.id, firstName: user.firstName }));
               this.router.navigate(['/']);
+              return;
             } else {
-              throw new Error("email and password doesn't match");
+              this.errorMessageSource.next("Email and password mismatch.");
             }
-          } else {
-            throw new Error('no email matched');
           }
         });
       });
+      this.errorMessageSource.next("Email and password mismatch.");
   }
 
   register(userData:any) {
     // reach out to db, create a user and set a flag in localstorage to stay logged in
     this.http.post(`${apiUrl}/users`, userData, httpOptions).subscribe(result => this.userData = result);
-    this.firstName.next(userData.firstName);
-    localStorage.setItem('loggedin', userData.id.toString());
+    this.firstNameSource.next(userData.firstName);
+    localStorage.setItem('loggedin', userData.id);
     this.router.navigate(['/']);
   }
 
@@ -66,5 +70,4 @@ export class AuthService {
     }
     return false;
   }
-
 }
