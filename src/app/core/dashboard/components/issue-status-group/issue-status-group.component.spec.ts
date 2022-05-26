@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IssueItemComponent } from './issue-item.component';
+import { IssueStatusGroupComponent } from './issue-status-group.component';
 
-describe('IssueItemComponent', () => {
-  let component: IssueItemComponent;
-  let fixture: ComponentFixture<IssueItemComponent>;
+describe('IssueStatusGroupComponent', () => {
+  let component: IssueStatusGroupComponent;
+  let fixture: ComponentFixture<IssueStatusGroupComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ IssueItemComponent ]
+      declarations: [ IssueStatusGroupComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IssueItemComponent);
+    fixture = TestBed.createComponent(IssueStatusGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -59,4 +59,9 @@ export class DashboardComponent implements OnInit {
         .subscribe(firstName => this.firstName = firstName);
     }
   }
+
+  onClickIssue(issue: IFetchIssue) {
+    this.router.navigate(['issue-tracker/issues/', issue.id])
+    console.log(issue);
+  }
 }

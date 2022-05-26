@@ -19,7 +19,7 @@ export class AddIssueComponent implements OnInit {
   groupsList: IFetchGroup[] = [];
 
   // Form Variables
-  createdByUserId!: number;
+  createdByUserId: string = "";
   issueName: string = "";
   issueMessage: string = "";
   dateCreated!: Date;
@@ -40,7 +40,7 @@ export class AddIssueComponent implements OnInit {
 
   onSubmit() {
     const newIssue: ICreateIssue = {
-      createdByUserId: this.userData.id,
+      createdByUserName: `${this.authService.capitalizeName(this.userData.firstName)} ${this.authService.capitalizeName(this.userData.lastName)}`,
       issueName: this.issueName,
       issueMessage: this.issueMessage,
       dateCreated: new Date().toUTCString(),

@@ -1,42 +1,23 @@
 <h1 class="text-center font-bold text-2xl m-4">Welcome back {{firstName}}!</h1>
-<div class="flex justify-center items-center text-lg">
-  <!-- to do issues section -->
-  <div class="bg-neutral-200 rounded-md w-full max-w-lg mx-4">
-    <h1 class="ml-1 font-bold text-neutral-500">Todo
-      <span class="text-neutral-400">{{todoIssues.length}}</span>
-    </h1>
-    <!-- issues -->
-    <div
-      *ngFor="let todo of todoIssues"
-      class="bg-neutral-100 text-neutral-600 font-semibold m-1 p-4"
-    >
-      <!-- issue name -->
-      <h3 class="break-words">{{todo.issueName}}</h3>
-      <!-- issue group -->
-      <div class="bg-neutral-400 w-max rounded mt-3">
-        <p class="text-base text-white px-2">{{todo.groupAssociated}}</p>
-      </div>
-      <div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- in progress issues section -->
-  <div>
-    <!-- issues -->
-    <div *ngFor="let inProgress of inProgressIssues">{{inProgress.issueName}}</div>
-  </div>
-
-  <!-- in review issues section -->
-  <div>
-    <!-- issues -->
-    <div *ngFor="let inReview of inReviewIssues">{{inReview.issueName}}</div>
-  </div>
-
-  <!-- in progress issues section -->
-  <div>
-    <!-- issues -->
-    <div *ngFor="let done of doneIssues">{{done.issueName}}</div>
-  </div>
+<div class="flex flex-wrap justify-center items-center text-lg">
+  <app-issue-status-group
+    (onClickIssue)="onClickIssue($event)"
+    name="TO DO"
+    [issues]="todoIssues"
+  ></app-issue-status-group>
+  <app-issue-status-group
+    (onClickIssue)="onClickIssue($event)"
+    name="IN PROGRESS"
+    [issues]="inProgressIssues"
+  ></app-issue-status-group>
+  <app-issue-status-group
+    (onClickIssue)="onClickIssue($event)"
+    name="IN REVIEW"
+    [issues]="inReviewIssues"
+  ></app-issue-status-group>
+  <app-issue-status-group
+    (onClickIssue)="onClickIssue($event)"
+    name="DONE"
+    [issues]="doneIssues"
+  ></app-issue-status-group>
 </div>

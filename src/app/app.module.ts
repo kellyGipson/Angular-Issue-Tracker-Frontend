@@ -17,8 +17,9 @@ import { GroupComponent } from './core/group/group.component';
 import { ProfileComponent } from './core/profile/profile.component';
 import { ProfileDetailComponent } from './core/profile/components/profile-detail/profile-detail.component';
 import { AddIssueComponent } from './core/add-issue/add-issue.component';
-import { IssueItemComponent } from './core/issues/components/issue-item/issue-item.component';
 import { AddGroupComponent } from './core/add-group/add-group.component';
+import { IssueStatusGroupComponent } from './core/dashboard/components/issue-status-group/issue-status-group.component';
+import { IssueDetailsComponent } from './core/issues/components/issue-details/issue-details.component';
 
 @NgModule({
   declarations: [
@@ -34,8 +35,9 @@ import { AddGroupComponent } from './core/add-group/add-group.component';
     ProfileComponent,
     ProfileDetailComponent,
     AddIssueComponent,
-    IssueItemComponent,
-    AddGroupComponent
+    AddGroupComponent,
+    IssueStatusGroupComponent,
+    IssueDetailsComponent
   ],
   imports: [
     BrowserModule,

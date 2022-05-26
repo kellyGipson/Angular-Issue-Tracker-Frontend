@@ -26,7 +26,7 @@ export interface IFetchIssue {
 }
 
 export interface ICreateIssue {
-  createdByUserId: number,
+  createdByUserName: string,
   issueName: string,
   issueMessage: string,
   dateCreated: string,

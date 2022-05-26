@@ -9,6 +9,7 @@ import { ProfileComponent } from './core/profile/profile.component';
 import { RegisterComponent } from './core/register/register.component';
 import { AddIssueComponent } from './core/add-issue/add-issue.component';
 import { AddGroupComponent } from './core/add-group/add-group.component';
+import { IssueDetailsComponent } from './core/issues/components/issue-details/issue-details.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'issue-tracker/issues/add',
     component: AddIssueComponent,
+  },
+  {
+    path: 'issue-tracker/issues/:id',
+    component: IssueDetailsComponent,
   },
   {
     path: 'issue-tracker/group',
