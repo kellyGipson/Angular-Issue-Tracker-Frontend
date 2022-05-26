@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 import { emptyUser, ILoginUser, IRegUser, IUser } from 'src/app/interfaces/USER';
 import { apiUrl, httpOptions } from 'src/app/interfaces/API';
+import { IFetchIssue } from 'src/app/interfaces/ISSUE';
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +87,10 @@ export class AuthService {
     this.firstNameSource.next(this.capitalizeName(userData.firstName));
     localStorage.setItem('loggedin', userData.id);
     this.router.navigate(['/']);
+  }
+
+  getUser(id: number): Observable<IUser> {
+    return this.http.get<IUser>(`${apiUrl}/users/${id}`)
   }
 
   editUser(userData: IUser): Observable<IUser> {

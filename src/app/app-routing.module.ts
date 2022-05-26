@@ -7,6 +7,8 @@ import { LoginComponent } from './core/login/login.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { ProfileComponent } from './core/profile/profile.component';
 import { RegisterComponent } from './core/register/register.component';
+import { AddIssueComponent } from './core/add-issue/add-issue.component';
+import { AddGroupComponent } from './core/add-group/add-group.component';
 
 const routes: Routes = [
   {
@@ -31,8 +33,16 @@ const routes: Routes = [
     component: IssuesComponent,
   },
   {
+    path: 'issue-tracker/issues/add',
+    component: AddIssueComponent,
+  },
+  {
     path: 'issue-tracker/group',
     component: GroupComponent,
+  },
+  {
+    path: 'issue-tracker/group/add',
+    component: AddGroupComponent,
   },
   {
     path: 'issue-tracker/profile',

@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { IFetchGroup } from 'src/app/interfaces/GROUP';
+import { IFetchIssue } from 'src/app/interfaces/ISSUE';
+import { GroupService } from 'src/app/services/group/group.service';
+
+import { IssuesService } from 'src/app/services/issues/issues.service';
 
 @Component({
   selector: 'app-issues',
@@ -6,10 +11,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./issues.component.css']
 })
 export class IssuesComponent implements OnInit {
+  issuesList!: IFetchIssue[];
+  groupList!: IFetchGroup[];
 
-  constructor() { }
+  constructor(
+    private issuesService: IssuesService,
+    private groupService: GroupService,
+  ) { }
 
   ngOnInit(): void {
+    this.issuesService.getIssues().subscribe(issues => this.issuesList = issues);
+    this.groupService.getGroups().subscribe(groups => this.groupList = groups)
   }
 
 }

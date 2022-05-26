@@ -21,6 +21,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   addOnClick() { // Nav Item onClick Fn
-
+    this.uiService.activeNavItemSource.next("Add");
+    this.router.navigate(["issue-tracker/issues/add"])
   }
 }

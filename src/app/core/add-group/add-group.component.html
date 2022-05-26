@@ -1,0 +1,27 @@
+<div class="w-full h-screen flex justify-center items-center text-slate-500">
+  <form
+    (ngSubmit)="createGroup()"
+    class="rounded-md p-4 bg-white w-screen xs:w-[350px]"
+  >
+    <!-- Heading -->
+    <h1 class="text-center font-bold">Create a group</h1>
+    <!-- groupName -->
+    <div class="flex flex-col justify-center">
+      <label for="groupName">Group Name</label>
+      <input
+        class="focus-visible:outline-none border-b-2"
+        [(ngModel)]="groupName"
+        type="text"
+        name="groupName"
+        id="groupName"
+        required
+      >
+    </div>
+    <input
+      [disabled]="groupName.length === 0"
+      class="bg-emerald-400 text-white underline underline-offset-1 w-full mt-4 p-2 rounded-full disabled:bg-slate-400"
+      type="submit"
+      value="Create Issue"
+    >
+  </form>
+</div>

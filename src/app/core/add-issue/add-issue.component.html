@@ -1,0 +1,62 @@
+<div class="w-full h-screen flex justify-center items-center text-slate-500">
+  <form
+    (ngSubmit)="onSubmit()"
+    class="rounded-md p-4 bg-white w-screen xs:w-[350px]"
+  >
+    <!-- Heading -->
+    <h1 class="text-center font-bold">Create an Issue</h1>
+    <!-- issueName -->
+    <div class="flex flex-col justify-center">
+      <label for="issueName">Issue Name</label>
+      <input
+        class="focus-visible:outline-none border-b-2"
+        [(ngModel)]="issueName"
+        type="text"
+        name="issueName"
+        id="issueName"
+        required
+      >
+    </div>
+    <!-- issueMessage -->
+    <div class="flex flex-col justify-center">
+      <label for="issueMessage">Issue Message</label>
+      <input
+        class="focus-visible:outline-none border-b-2"
+        [(ngModel)]="issueMessage"
+        type="text"
+        name="issueMessage"
+        id="issueMessage"
+        required
+      >
+    </div>
+    <!-- groupAssociated -->
+    <div>
+      <label for="groupAssociated"></label>
+      <select
+        class="border-2 rounded my-4 w-full"
+        *ngIf="groupsList.length > 0"
+        [(ngModel)]="groupAssociated"
+        type="text"
+        name="groupAssociated"
+        id="groupAssociated"
+        required
+      >
+        <option
+          *ngFor="let group of groupsList"
+          value="{{group.groupName}}"
+        >{{group.groupName}}</option>
+      </select>
+      <a
+        href="/issue-tracker/group/add"
+        class="text-blue-400 underline underline-offset-1 visited:text-purple-400"
+        *ngIf="groupsList.length === 0"
+      >Please create a group to add this issue to.</a>
+    </div>
+    <input
+      [disabled]="groupsList.length === 0 || issueName === '' || issueMessage === '' || groupAssociated === '' "
+      class="bg-emerald-400 text-white underline underline-offset-1 w-full mt-4 p-2 rounded-full disabled:bg-slate-400"
+      type="submit"
+      value="Create Issue"
+    >
+  </form>
+</div>

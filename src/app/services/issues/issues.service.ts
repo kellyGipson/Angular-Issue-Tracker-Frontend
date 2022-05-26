@@ -1,18 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+
+import { emptyIssue, ICreateIssue, IFetchIssue } from '../../interfaces/ISSUE'
+import { apiUrl, httpOptions } from 'src/app/interfaces/API';
+import { IUser } from 'src/app/interfaces/USER';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IssuesService {
-  _apiUrl = "192.168.1.187:8080/issues"
+  apiUrl: string = `${apiUrl}/issues/`
+
+  // Observables
+  issuesListSource: BehaviorSubject<IFetchIssue[]> = new BehaviorSubject<IFetchIssue[]>([emptyIssue]);
+  issuesList$: Observable<IFetchIssue[]> = this.issuesListSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
   getIssues(): Observable<IFetchIssue[]> {
-    return this.http.get<IFetchIssue[]>(this._apiUrl);
+    return this.http.get<IFetchIssue[]>(this.apiUrl);
   }
 
+  createIssue(newIssue: ICreateIssue): Observable<ICreateIssue> {
+    return this.http.post<ICreateIssue>(this.apiUrl, newIssue, httpOptions);
+  }
 }

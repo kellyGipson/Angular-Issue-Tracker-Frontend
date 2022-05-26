@@ -9,7 +9,7 @@ export class UiService {
   private userIsLoggedIn: boolean = localStorage.getItem('loggedin') !== null;
   private subject = new Subject<boolean>();
 
-  private activeNavItemSource = new BehaviorSubject<string>(this.getActiveNavItem());
+  activeNavItemSource = new BehaviorSubject<string>(this.getActiveNavItem());
   activeNavItem$ = this.activeNavItemSource.asObservable();
 
   constructor(private router: Router) {}
@@ -18,10 +18,11 @@ export class UiService {
     switch(window.location.pathname) {
       case "/issue-tracker": return "Home";
       case "/issue-tracker/issues": return "Issues";
+      case "/issue-tracker/issues/add": return "Issues";
       case "/issue-tracker/group": return "Group";
       case "/issue-tracker/profile": return "Profile";
     }
-    return "Home"; // Failsafe
+    return "Add";
   }
 
   setActiveNavItem(navItem: "Home" | "Issues" | "Group" | "Profile") {

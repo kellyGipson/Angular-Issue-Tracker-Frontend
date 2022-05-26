@@ -1,24 +1,35 @@
-interface reaction {
+export interface reaction {
   userThatReactedId: number,
   iconUsed: string,
 }
 
-interface IFetchIssue {
+export const emptyIssue: IFetchIssue = {
+  id: 0,
+  createdByUserName: "",
+  issueName: "",
+  issueMessage: "",
+  dateCreated: "",
+  reactions: [],
+  groupAssociated: "",
+  issueStatus: "todo",
+}
+
+export interface IFetchIssue {
   id: number,
-  createdByUserId: number,
-  ticketName: string,
-  ticketMessage: string,
-  dateCreated: Date,
+  createdByUserName: string,
+  issueName: string,
+  issueMessage: string,
+  dateCreated: string,
   reactions: reaction[],
   groupAssociated: string,
   issueStatus: "todo" | "inProgress" | "inReview" | "done",
 }
 
-interface ICreateIssue {
+export interface ICreateIssue {
   createdByUserId: number,
-  ticketName: string,
-  ticketMessage: string,
-  dateCreated: Date,
+  issueName: string,
+  issueMessage: string,
+  dateCreated: string,
   reactions: reaction[],
   groupAssociated: string,
   issueStatus: "todo" | "inProgress" | "inReview" | "done",
