@@ -21,7 +21,7 @@ export class NavItemComponent implements OnInit {
 
   ngOnInit(): void {
     this.decideIcon();
-    this.uiService.activeNavItem.subscribe(navItem => {this.currentActiveNavItem = navItem; this.onClickFn(navItem);});
+    this.uiService.activeNavItem$.subscribe(navItem => {this.currentActiveNavItem = navItem; this.onClickFn(navItem);});
   }
 
   decideIcon() {

@@ -1,3 +1,14 @@
+export const emptyUser = {
+  id:0,
+  email:"",
+  password:"",
+  firstName:"",
+  lastName:"",
+  userJobTitle: "",
+  associatedGroups: [],
+  imgUrl: "",
+}
+
 export interface ILocalStorageUser {
   id: number,
   firstName: string,
@@ -21,4 +32,7 @@ export interface IUser {
   password: string,
   firstName: string,
   lastName: string,
+  userJobTitle: string,
+  associatedGroups: string[],
+  imgUrl: string,
 }

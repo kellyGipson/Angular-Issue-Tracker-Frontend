@@ -18,10 +18,12 @@ export class DashboardComponent implements OnInit {
     private uiService: UiService,
     private authService: AuthService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    if(!this.uiService.checkLoggedIn()) { this.router.navigate(['issue-tracker/login']); return; }
+    if(!this.uiService.checkLoggedIn()) {
+      this.router.navigate(['issue-tracker/login']); return;
+    }
     this.getFirstName();
   }
 
@@ -35,7 +37,8 @@ export class DashboardComponent implements OnInit {
     let localParsed: ILocalStorageUser;
     if(localData !== null){
       localParsed = JSON.parse(localData)
-      this.authService.getFirstName(localParsed.id).subscribe(firstName => this.firstName = firstName)
+      this.authService.getFirstName(localParsed.id)
+        .subscribe(firstName => this.firstName = firstName);
     }
   }
 }

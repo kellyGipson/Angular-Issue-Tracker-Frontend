@@ -15,6 +15,7 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
 import { IssuesComponent } from './core/issues/issues.component';
 import { GroupComponent } from './core/group/group.component';
 import { ProfileComponent } from './core/profile/profile.component';
+import { ProfileDetailComponent } from './core/profile/components/profile-detail/profile-detail.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ProfileComponent } from './core/profile/profile.component';
     NotFoundComponent,
     IssuesComponent,
     GroupComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileDetailComponent
   ],
   imports: [
     BrowserModule,

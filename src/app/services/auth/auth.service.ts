@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
-import { ILoginUser, IUser } from 'src/app/interfaces/USER';
+import { emptyUser, ILoginUser, IRegUser, IUser } from 'src/app/interfaces/USER';
 import { apiUrl, httpOptions } from 'src/app/interfaces/API';
-import { ReadVarExpr } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -26,16 +25,27 @@ export class AuthService {
   errorMessageSource: BehaviorSubject<string> = new BehaviorSubject<string>("");
   errorMessage$ = this.errorMessageSource.asObservable();
 
+  userDataSource: BehaviorSubject<IUser> = new BehaviorSubject<IUser>(emptyUser);
+  userData$ = this.userDataSource.asObservable();
+
   constructor(private router: Router, private http: HttpClient) {}
 
   getId(): number {
     const userDataJson = localStorage.getItem('loggedin');
     if(userDataJson !== null) {
       const userDataParsed = JSON.parse(userDataJson);
-      console.log(userDataParsed.id)
       return userDataParsed.id
     }
     return -1;
+  }
+
+  getUserData(): Observable<IUser> {
+    let userId;
+    if(this.getId() === -1) {
+      throw new Error("Login is invalid, please login again.");
+    }
+    userId = this.getId();
+    return this.http.get<IUser>(`${apiUrl}/users/${userId}`, httpOptions)
   }
 
   getFirstName(id: number): Observable<string> {
@@ -73,9 +83,13 @@ export class AuthService {
   register(userData:any) {
     // reach out to db, create a user and set a flag in localstorage to stay logged in
     this.http.post(`${apiUrl}/users`, userData, httpOptions).subscribe(result => this.userData = result);
-    this.firstNameSource.next(userData.firstName);
+    this.firstNameSource.next(this.capitalizeName(userData.firstName));
     localStorage.setItem('loggedin', userData.id);
     this.router.navigate(['/']);
+  }
+
+  editUser(userData: IUser): Observable<IUser> {
+    return this.http.put<IUser>(`${apiUrl}/users/${userData.id}`, userData, httpOptions)
   }
 
   pwHasSpecialCharacters(s: string) {
@@ -83,5 +97,9 @@ export class AuthService {
       if(s.includes(char)) return true;
     }
     return false;
+  }
+
+  capitalizeName(name: string): string {
+    return name.replace(/\b(\w)/g, s => s.toUpperCase());
   }
 }

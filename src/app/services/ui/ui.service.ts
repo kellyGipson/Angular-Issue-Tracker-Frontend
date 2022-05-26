@@ -10,7 +10,7 @@ export class UiService {
   private subject = new Subject<boolean>();
 
   private activeNavItemSource = new BehaviorSubject<string>(this.getActiveNavItem());
-  activeNavItem = this.activeNavItemSource.asObservable();
+  activeNavItem$ = this.activeNavItemSource.asObservable();
 
   constructor(private router: Router) {}
 

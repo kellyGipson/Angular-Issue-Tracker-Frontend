@@ -46,6 +46,9 @@ export class RegisterComponent implements OnInit {
         lastName: this.lastName,
         email: this.email.toLowerCase(),
         password: this.password,
+        userJobTitle: "",
+        associatedGroups: [],
+        imgUrl: "",
       }
 
       this.authService.register(userData);

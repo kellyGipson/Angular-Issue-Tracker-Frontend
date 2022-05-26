@@ -1,1 +1,83 @@
-<p>profile works!</p>
+<!-- Wrapper -->
+<main *ngIf="!editProfile" class="">
+  <!-- profile square -->
+  <header class="relative h-72 w-screen bg-emerald-600 rounded-b-3xl text-white overflow-hidden">
+    <!-- profile details -->
+    <div class="profileContainer h-full w-full flex flex-col justify-around items-center">
+      <h1 class="font-bold text-lg">Profile</h1>
+      <!-- image container -->
+      <div class="flex justify-center items-center h-24 w-24 bg-white rounded-full ">
+        <img class="rounded-full h-[5.5rem] w-[5.5rem]" src="../../../assets/default_profile_picture.jpg" alt="">
+      </div>
+      <!-- user summary -->
+      <div class="text-center">
+        <p class="font-bold text-lg">{{userData.firstName + ' ' + userData.lastName}}</p>
+        <p *ngIf="userData.userJobTitle !== ''">{{userData.userJobTitle}}</p>
+        <button (click)="showEditProfile()" class="border p-2 mt-4 rounded-md bg-[hsla(0, 0%, 0%, 0.9)]">Edit my profile</button>
+      </div>
+    </div>
+    <!-- background circles -->
+    <div class="absolute h-[40rem] w-[40rem] bg-emerald-500 rounded-full translate-x-[25vw] -translate-y-[36rem]"></div>
+    <div class="absolute h-[40rem] w-[40rem] bg-emerald-400 rounded-full translate-x-[66vw] -translate-y-[36rem]"></div>
+  </header>
+  <!-- profile info -->
+  <section class="mt-4">
+    <app-profile-detail [icon]="envelope" subject="Email" [name]="userData.email"></app-profile-detail>
+    <hr class="">
+  </section>
+  <!-- edit profile popup -->
+</main>
+<main *ngIf="editProfile" class="absolute w-full h-screen bg-white top-0 z-20">
+  <!-- edit profile button container -->
+  <div>
+    <button (click)="hideEditProfile()" class="fixed top-0 right-0 border rounded-md py-2 px-4 mt-4 mr-4">Close</button>
+  </div>
+  <!-- form container -->
+  <div class="h-full flex flex-col justify-center items-center text-neutral-500">
+    <h1 class="font-bold text-lg">Edit my profile</h1>
+    <!-- Edit profile form -->
+    <form (ngSubmit)="onEditSubmit()" class="w-[80vw]">
+      <div class="flex flex-col mt-4">
+        <label for="firstName">First Name</label>
+        <input
+          class="focus-visible:outline-none border-2 rounded-md pl-3"
+          [(ngModel)]="firstName"
+          type="text"
+          name="firstName"
+          id="firstName"
+          required
+        >
+      </div>
+      <div class="flex flex-col mt-4">
+        <label for="lastName">Last Name</label>
+        <input
+          class="focus-visible:outline-none border-2 rounded-md pl-3"
+          [(ngModel)]="lastName"
+          type="text"
+          name="lastName"
+          id="lastName"
+          required
+        >
+      </div>
+      <div class="flex flex-col mt-4">
+        <label for="userJobTitle">Job Title</label>
+        <input
+          class="focus-visible:outline-none border-2 rounded-md pl-3"
+          [(ngModel)]="userJobTitle"
+          type="text"
+          name="userJobTitle"
+          id="userJobTitle"
+          required
+        >
+      </div>
+      <div>
+        <input
+          class="bg-emerald-400 text-white underline underline-offset-1 w-full mt-4 p-2 rounded-full"
+          type="submit"
+          value="Update Profile"
+        >
+      </div>
+    </form>
+    <!-- end edit profile form -->
+  </div>
+</main>
