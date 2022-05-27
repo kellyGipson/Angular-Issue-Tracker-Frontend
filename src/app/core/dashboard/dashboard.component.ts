@@ -62,6 +62,5 @@ export class DashboardComponent implements OnInit {
 
   onClickIssue(issue: IFetchIssue) {
     this.router.navigate(['issue-tracker/issues/', issue.id])
-    console.log(issue);
   }
 }

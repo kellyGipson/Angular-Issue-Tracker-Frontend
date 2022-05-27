@@ -37,7 +37,7 @@ import { IssueDetailsComponent } from './core/issues/components/issue-details/is
     AddIssueComponent,
     AddGroupComponent,
     IssueStatusGroupComponent,
-    IssueDetailsComponent
+    IssueDetailsComponent,
   ],
   imports: [
     BrowserModule,

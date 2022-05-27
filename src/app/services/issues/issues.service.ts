@@ -23,7 +23,37 @@ export class IssuesService {
     return this.http.get<IFetchIssue[]>(this.apiUrl);
   }
 
+  getIssue(id: string | number) {
+    return this.http.get<IFetchIssue>(`${this.apiUrl}${id}`);
+  }
+
   createIssue(newIssue: ICreateIssue): Observable<ICreateIssue> {
     return this.http.post<ICreateIssue>(this.apiUrl, newIssue, httpOptions);
+  }
+
+  updateIssue(newIssue: IFetchIssue): Observable<IFetchIssue> {
+    return this.http.put<IFetchIssue>(`${this.apiUrl}${newIssue.id}`, newIssue, httpOptions);
+  }
+
+  deleteIssue(newIssue: IFetchIssue) {
+    return this.http.delete(`${this.apiUrl}${newIssue.id}`, httpOptions);
+  }
+
+  getNextIssueStatus(currentStatus: "todo" | "inProgress" | "inReview" | "done") {
+    switch(currentStatus) {
+      case "todo": return "inProgress";
+      case "inProgress": return "inReview";
+      case "inReview": return "done";
+      case "done": return "done";
+    }
+  }
+
+  getPreviousIssueStatus(currentStatus: "todo" | "inProgress" | "inReview" | "done") {
+    switch(currentStatus) {
+      case "todo": return "todo";
+      case "inProgress": return "todo";
+      case "inReview": return "inProgress";
+      case "done": return "inReview";
+    }
   }
 }
