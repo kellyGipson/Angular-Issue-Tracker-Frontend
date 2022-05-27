@@ -10,7 +10,7 @@ import { IUser } from 'src/app/interfaces/USER';
 @Injectable({
   providedIn: 'root'
 })
-export class IssuesService {
+export class IssueService {
   apiUrl: string = `${apiUrl}/issues/`
 
   // Observables

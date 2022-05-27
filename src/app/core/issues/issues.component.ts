@@ -3,7 +3,7 @@ import { IFetchGroup } from 'src/app/interfaces/GROUP';
 import { IFetchIssue } from 'src/app/interfaces/ISSUE';
 import { GroupService } from 'src/app/services/group/group.service';
 
-import { IssuesService } from 'src/app/services/issues/issues.service';
+import { IssueService } from 'src/app/services/issues/issues.service';
 
 @Component({
   selector: 'app-issues',
@@ -15,7 +15,7 @@ export class IssuesComponent implements OnInit {
   groupList!: IFetchGroup[];
 
   constructor(
-    private issuesService: IssuesService,
+    private issuesService: IssueService,
     private groupService: GroupService,
   ) { }
 

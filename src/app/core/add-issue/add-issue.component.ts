@@ -3,7 +3,7 @@ import { IFetchGroup } from 'src/app/interfaces/GROUP';
 import { ICreateIssue, IFetchIssue } from 'src/app/interfaces/ISSUE';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { IssuesService } from 'src/app/services/issues/issues.service';
+import { IssueService } from 'src/app/services/issues/issues.service';
 import { GroupService } from 'src/app/services/group/group.service';
 import { emptyUser, IUser } from 'src/app/interfaces/USER';
 
@@ -28,7 +28,7 @@ export class AddIssueComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private issuesService: IssuesService,
+    private issuesService: IssueService,
     private groupService: GroupService
   ) { }
 

@@ -26,7 +26,6 @@ export class UiService {
   }
 
   setActiveNavItem(navItem: "Home" | "Issues" | "Group" | "Profile") {
-    console.log(navItem);
     this.activeNavItemSource.next(navItem);
   }
 
@@ -38,5 +37,13 @@ export class UiService {
 
   OnLogin(): Observable<boolean> {
     return this.subject.asObservable();
+  }
+
+  navigateTo(dest: string, param?:number) {
+    if(param) {
+      this.router.navigate([dest, param]);
+    } else {
+      this.router.navigate([dest]);
+    }
   }
 }

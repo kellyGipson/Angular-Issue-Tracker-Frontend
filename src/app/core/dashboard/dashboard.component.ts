@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UiService } from 'src/app/services/ui/ui.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ILocalStorageUser, IUser } from 'src/app/interfaces/USER';
-import { IssuesService } from 'src/app/services/issues/issues.service';
+import { IssueService } from 'src/app/services/issues/issues.service';
 import { IFetchIssue } from 'src/app/interfaces/ISSUE';
 import { Observable } from 'rxjs';
 
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     private uiService: UiService,
     private authService: AuthService,
     private router: Router,
-    private issuesService: IssuesService,
+    private issuesService: IssueService,
   ) {}
 
   ngOnInit(): void {

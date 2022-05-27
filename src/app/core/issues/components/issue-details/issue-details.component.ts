@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { emptyIssue, IFetchIssue } from 'src/app/interfaces/ISSUE';
 import { Router } from '@angular/router';
 
-import { IssuesService } from 'src/app/services/issues/issues.service';
+import { IssueService } from 'src/app/services/issues/issues.service';
 import { UiService } from 'src/app/services/ui/ui.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class IssueDetailsComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private issuesService: IssuesService,
+    private issuesService: IssueService,
     private uiService: UiService,
     private router: Router,
   ) { }
