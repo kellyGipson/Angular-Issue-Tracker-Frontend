@@ -3,6 +3,7 @@ import { ICreateGroup } from 'src/app/interfaces/GROUP';
 import { Router } from '@angular/router';
 
 import { GroupService } from 'src/app/services/group/group.service';
+import { UiService } from 'src/app/services/ui/ui.service';
 
 @Component({
   selector: 'app-add-group',
@@ -14,10 +15,12 @@ export class AddGroupComponent implements OnInit {
 
   constructor(
     private groupService: GroupService,
-    private router: Router
+    private router: Router,
+    private uiService: UiService,
   ) { }
 
   ngOnInit(): void {
+    this.uiService.checkLoggedIn();
   }
 
   createGroup() {

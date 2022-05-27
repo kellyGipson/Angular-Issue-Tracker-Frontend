@@ -30,6 +30,7 @@ export class IssueDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.uiService.checkLoggedIn();
     this.uiService.activeNavItemSource.next("Add");
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if(id !== null) {

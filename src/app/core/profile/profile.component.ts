@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faEnvelope, faUsersLine } from '@fortawesome/free-solid-svg-icons';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { UiService } from 'src/app/services/ui/ui.service';
 
 import { emptyUser, IUser } from 'src/app/interfaces/USER';
 
@@ -21,9 +22,13 @@ export class ProfileComponent implements OnInit {
   lastName: string = "";
   userJobTitle: string = "";
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private uiService: UiService,
+  ) { }
 
   ngOnInit(): void {
+    this.uiService.checkLoggedIn();
     this.authService.getUserData()
       .subscribe(user => this.userData = {
         ...user,
@@ -56,5 +61,9 @@ export class ProfileComponent implements OnInit {
     console.log(newUserData);
     this.authService.editUser(newUserData).subscribe(userData => this.userData = userData)
     this.editProfile = false;
+  }
+
+  signOut() {
+    this.uiService.signOut();
   }
 }

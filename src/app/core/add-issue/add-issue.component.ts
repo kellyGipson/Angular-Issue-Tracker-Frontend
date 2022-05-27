@@ -5,6 +5,7 @@ import { ICreateIssue, IFetchIssue } from 'src/app/interfaces/ISSUE';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { IssueService } from 'src/app/services/issues/issues.service';
 import { GroupService } from 'src/app/services/group/group.service';
+import { UiService } from 'src/app/services/ui/ui.service';
 import { emptyUser, IUser } from 'src/app/interfaces/USER';
 
 @Component({
@@ -29,10 +30,12 @@ export class AddIssueComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private issuesService: IssueService,
-    private groupService: GroupService
+    private groupService: GroupService,
+    private uiService: UiService,
   ) { }
 
   ngOnInit(): void {
+    this.uiService.checkLoggedIn();
     this.authService.getUserData().subscribe(userData => this.userData = userData);
     this.issuesService.getIssues().subscribe(issues => this.issuesList = issues);
     this.groupService.getGroups().subscribe(groups => this.groupsList = groups);

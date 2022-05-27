@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ILocalStorageUser, IUser } from 'src/app/interfaces/USER';
 import { IssueService } from 'src/app/services/issues/issues.service';
 import { IFetchIssue } from 'src/app/interfaces/ISSUE';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,9 +29,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if(!this.uiService.checkLoggedIn()) {
-      this.router.navigate(['issue-tracker/login']); return;
-    }
+    this.uiService.checkLoggedIn();
     this.getFirstName();
     this.issuesService.getIssues()
       .subscribe(issues => {
@@ -42,12 +39,7 @@ export class DashboardComponent implements OnInit {
           if(issue.issueStatus === "inReview") this.inReviewIssues.push(issue);
           if(issue.issueStatus === "done") this.doneIssues.push(issue);
         });
-      })
-  }
-
-  signOut() {
-    localStorage.removeItem('loggedin')
-    this.router.navigate(['/issue-tracker/login']);
+      });
   }
 
   getFirstName() {

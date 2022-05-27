@@ -21,6 +21,7 @@ export class GroupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.uiService.checkLoggedIn();
     // first forEach grabs the groups, the second actually grabs the group itself
     // the getGroups function returns an array of groups
     this.groupService.getGroups().forEach(groups => groups.forEach(group => {

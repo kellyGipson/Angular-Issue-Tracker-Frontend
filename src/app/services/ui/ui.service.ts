@@ -29,14 +29,21 @@ export class UiService {
     this.activeNavItemSource.next(navItem);
   }
 
-  checkLoggedIn(): boolean {
+  checkLoggedIn(): void {
     this.userIsLoggedIn = localStorage.getItem('loggedin') !== null;
     this.subject.next(this.userIsLoggedIn);
-    return this.userIsLoggedIn;
+    if(this.userIsLoggedIn) {
+      this.router.navigate(['issue-tracker/login']); return;
+    }
   }
 
   OnLogin(): Observable<boolean> {
     return this.subject.asObservable();
+  }
+
+  signOut() {
+    localStorage.removeItem('loggedin')
+    this.router.navigate(['/issue-tracker/login']);
   }
 
   navigateTo(dest: string, param?:number) {
