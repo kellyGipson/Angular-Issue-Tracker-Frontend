@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { emptyUser, ILoginUser, IRegUser, IUser } from 'src/app/interfaces/USER';
+import { emptyUser, ILoginUser, IUser } from 'src/app/interfaces/USER';
 import { apiUrl, httpOptions } from 'src/app/interfaces/API';
-import { IFetchIssue } from 'src/app/interfaces/ISSUE';
 
 @Injectable({
   providedIn: 'root'
@@ -63,10 +62,12 @@ export class AuthService {
 
   login(userData: ILoginUser): void {
     // reach out to db, verify login info and set a flag in localstorage to stay logged in
+    console.log(userData);
     this.http.get<IUser[]>(`${apiUrl}/users`)
       .forEach(users => { // grab the users from the observable
+        console.log(users);
         users.forEach(user => { // iterate through the users
-          if(user.email === userData.email.toLowerCase()) {
+          if(user.email.toLowerCase() === userData.email.toLowerCase()) {
             if(user.password === userData.password) {
               this.firstNameSource.next(user.firstName);
               localStorage.setItem('loggedin', JSON.stringify({ id: user.id, firstName: user.firstName }));
@@ -78,7 +79,6 @@ export class AuthService {
           }
         });
       });
-      this.errorMessageSource.next("Email and password mismatch.");
   }
 
   register(userData:any) {

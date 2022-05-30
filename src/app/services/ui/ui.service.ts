@@ -32,7 +32,7 @@ export class UiService {
   checkLoggedIn(): void {
     this.userIsLoggedIn = localStorage.getItem('loggedin') !== null;
     this.subject.next(this.userIsLoggedIn);
-    if(this.userIsLoggedIn) {
+    if(!this.userIsLoggedIn) {
       this.router.navigate(['issue-tracker/login']); return;
     }
   }

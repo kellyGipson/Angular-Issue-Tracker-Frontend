@@ -1,1 +1,25 @@
-<p>issues works!</p>
+<div class="flex flex-col mt-16">
+  <div class="flex flex-wrap justify-center items-center text-lg mb-24">
+    <app-issue-status-group
+      (onClickIssue)="onClickIssue($event)"
+      name="TO DO"
+      [issues]="todoIssues"
+    ></app-issue-status-group>
+    <app-issue-status-group
+      (onClickIssue)="onClickIssue($event)"
+      name="IN PROGRESS"
+      [issues]="inProgressIssues"
+    ></app-issue-status-group>
+    <app-issue-status-group
+      (onClickIssue)="onClickIssue($event)"
+      name="IN REVIEW"
+      [issues]="inReviewIssues"
+    ></app-issue-status-group>
+    <app-issue-status-group
+      (onClickIssue)="onClickIssue($event)"
+      name="DONE"
+      [issues]="doneIssues"
+    ></app-issue-status-group>
+  </div>
+
+</div>

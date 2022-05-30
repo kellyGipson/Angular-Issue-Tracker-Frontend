@@ -28,17 +28,17 @@ export class GroupComponent implements OnInit {
       // creating an object with the groups
       this.groups.push({ groupName: group.groupName, issues: [] });
       // first forEach grabs the issues, the second actually grabs the issue itself
-      // the getIssues function returns an array of issues
-      this.issueService.getIssues().forEach(issues => issues.forEach(issue => {
-        // for each group and issue, if the groups match, add it to the group's issue array
-        this.groups.forEach((group, idx) => {
-          if(issue.groupAssociated === group.groupName) {
-            this.groups[idx].issues.push(issue);
-          }
-        });
-      }));
-      console.log(this.groups)
     }));
+    // the getIssues function returns an array of issues
+    this.issueService.getIssues().forEach(issues => issues.forEach(issue => {
+      // for each group and issue, if the groups match, add it to the group's issue array
+      this.groups.forEach((group, idx) => {
+        if(issue.groupAssociated === group.groupName) {
+          this.groups[idx].issues.push(issue);
+        }
+      });
+    }));
+      console.log(this.groups)
   }
 
   navigateTo(path: string, param?: number) {

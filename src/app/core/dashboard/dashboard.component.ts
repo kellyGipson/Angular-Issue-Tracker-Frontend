@@ -21,6 +21,9 @@ export class DashboardComponent implements OnInit {
   inReviewIssues: IFetchIssue[] = [];
   doneIssues: IFetchIssue[] = [];
 
+  currentTime: number = new Date().getHours();
+  timeGreeting!: string;
+
   constructor(
     private uiService: UiService,
     private authService: AuthService,
@@ -40,6 +43,7 @@ export class DashboardComponent implements OnInit {
           if(issue.issueStatus === "done") this.doneIssues.push(issue);
         });
       });
+    this.timeGreeting = this.getGreeting();
   }
 
   getFirstName() {
@@ -52,7 +56,21 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  onClickIssue(issue: IFetchIssue) {
-    this.router.navigate(['issue-tracker/issues/', issue.id])
+  getGreeting(): string {
+    if(this.currentTime < 12) {
+      return "Good Morning";
+    } else if(this.currentTime > 12 && this.currentTime < 17) {
+      return "Good Afternoon";
+    } else {
+      return "Good Evening"
+    }
+  }
+
+  handleCardClick(cardTitle: string): void {
+    let url: string;
+    switch(cardTitle) {
+      case "View All Issues": url = "issue-tracker/issues"; break;
+      case "View All Groups": url = "issue-tracker/group"; break;
+    }
   }
 }

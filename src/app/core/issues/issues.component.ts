@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IFetchGroup } from 'src/app/interfaces/GROUP';
-import { IFetchIssue } from 'src/app/interfaces/ISSUE';
-import { GroupService } from 'src/app/services/group/group.service';
+import { Router } from '@angular/router';
 
+import { IFetchIssue } from 'src/app/interfaces/ISSUE';
 import { IssueService } from 'src/app/services/issues/issues.service';
 import { UiService } from 'src/app/services/ui/ui.service';
 
@@ -12,19 +11,33 @@ import { UiService } from 'src/app/services/ui/ui.service';
   styleUrls: ['./issues.component.css']
 })
 export class IssuesComponent implements OnInit {
-  issuesList!: IFetchIssue[];
-  groupList!: IFetchGroup[];
+  firstName!: string;
+  todoIssues: IFetchIssue[] = [];
+  inProgressIssues: IFetchIssue[] = [];
+  inReviewIssues: IFetchIssue[] = [];
+  doneIssues: IFetchIssue[] = [];
 
   constructor(
+    private uiService: UiService,
+    private router: Router,
     private issuesService: IssueService,
-    private groupService: GroupService,
-    private uiService: UiService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.uiService.checkLoggedIn();
-    this.issuesService.getIssues().subscribe(issues => this.issuesList = issues);
-    this.groupService.getGroups().subscribe(groups => this.groupList = groups)
+    this.issuesService.getIssues()
+      .subscribe(issues => {
+        issues.forEach((issue) => {
+          if(issue.issueStatus === "todo") this.todoIssues.push(issue);
+          if(issue.issueStatus === "inProgress") this.inProgressIssues.push(issue);
+          if(issue.issueStatus === "inReview") this.inReviewIssues.push(issue);
+          if(issue.issueStatus === "done") this.doneIssues.push(issue);
+        });
+      });
+  }
+
+  onClickIssue(issue: IFetchIssue) {
+    this.router.navigate(['issue-tracker/issues/', issue.id])
   }
 
 }

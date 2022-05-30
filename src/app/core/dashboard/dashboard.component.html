@@ -1,26 +1,30 @@
-<div class="flex flex-col">
-  <h1 class="text-center font-bold text-2xl my-16">Welcome back {{firstName}}!</h1>
-  <div class="flex flex-wrap justify-center items-center text-lg mb-24">
-    <app-issue-status-group
-      (onClickIssue)="onClickIssue($event)"
-      name="TO DO"
-      [issues]="todoIssues"
-    ></app-issue-status-group>
-    <app-issue-status-group
-      (onClickIssue)="onClickIssue($event)"
-      name="IN PROGRESS"
-      [issues]="inProgressIssues"
-    ></app-issue-status-group>
-    <app-issue-status-group
-      (onClickIssue)="onClickIssue($event)"
-      name="IN REVIEW"
-      [issues]="inReviewIssues"
-    ></app-issue-status-group>
-    <app-issue-status-group
-      (onClickIssue)="onClickIssue($event)"
-      name="DONE"
-      [issues]="doneIssues"
-    ></app-issue-status-group>
-  </div>
-
-</div>
+<main class="mx-4 text-neutral-600">
+  <header class="my-16">
+    <h1 class="font-bold text-2xl">{{timeGreeting}} {{firstName}}!</h1>
+    <p
+      class="font-semibold text-lg"
+    >
+      You have
+      {{(todoIssues.length === 0)? "no" : todoIssues.length.toString()}}
+      issue{{(todoIssues.length === 1) ? "" : "s"}}
+      for today.
+    </p>
+  </header>
+  <section class="w-full flex flex-grow flex-wrap gap-4 justify-between max-w-lg">
+    <app-dashboard-card
+      (navigateFunction)="handleCardClick($event)"
+      cardTitle="View All Issues"
+      class="basis-auto flex-grow min-w-max"
+    ></app-dashboard-card>
+    <app-dashboard-card
+      (navigateFunction)="handleCardClick($event)"
+      cardTitle="View All Groups"
+      class="basis-auto flex-grow min-w-max"
+    ></app-dashboard-card>
+    <app-dashboard-card
+      (navigateFunction)="handleCardClick($event)"
+      cardTitle="View All Groups"
+      class="basis-auto flex-grow min-w-max"
+    ></app-dashboard-card>
+  </section>
+</main>
