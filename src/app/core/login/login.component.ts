@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { GuardsCheckStart } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -73,5 +74,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.errorPassword = false;
     this.errorEmailAndPassword = false;
     this.errorMessage = null;
+  }
+
+  loginAsGuest() {
+    this.authService.login({ email: "guest@guest.com", password: "guestguest!" });
   }
 }

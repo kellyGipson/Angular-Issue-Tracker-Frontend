@@ -62,16 +62,14 @@ export class AuthService {
 
   login(userData: ILoginUser): void {
     // reach out to db, verify login info and set a flag in localstorage to stay logged in
-    console.log(userData);
     this.http.get<IUser[]>(`${apiUrl}/users`)
       .forEach(users => { // grab the users from the observable
-        console.log(users);
         users.forEach(user => { // iterate through the users
           if(user.email.toLowerCase() === userData.email.toLowerCase()) {
             if(user.password === userData.password) {
               this.firstNameSource.next(user.firstName);
               localStorage.setItem('loggedin', JSON.stringify({ id: user.id, firstName: user.firstName }));
-              this.router.navigate(['/']);
+              this.router.navigate(['issue-tracker']);
               return;
             } else {
               this.errorMessageSource.next("Email and password mismatch.");
