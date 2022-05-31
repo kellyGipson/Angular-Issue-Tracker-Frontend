@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { IFetchGroup } from 'src/app/interfaces/GROUP';
 import { ICreateIssue, IFetchIssue } from 'src/app/interfaces/ISSUE';
 
@@ -32,6 +34,7 @@ export class AddIssueComponent implements OnInit {
     private issuesService: IssueService,
     private groupService: GroupService,
     private uiService: UiService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -55,5 +58,6 @@ export class AddIssueComponent implements OnInit {
     this.issueName = "";
     this.issueMessage = "";
     this.groupAssociated = "";
+    this.router.navigate(["issue-tracker/issues"])
   }
 }

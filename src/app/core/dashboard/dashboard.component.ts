@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { UiService } from 'src/app/services/ui/ui.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { ILocalStorageUser, IUser } from 'src/app/interfaces/USER';
+import { ILocalStorageUser } from 'src/app/interfaces/USER';
 import { IssueService } from 'src/app/services/issues/issues.service';
 import { IFetchIssue } from 'src/app/interfaces/ISSUE';
 import { faTicket, faLayerGroup, faUser, IconDefinition } from '@fortawesome/free-solid-svg-icons'
@@ -33,7 +32,6 @@ export class DashboardComponent implements OnInit {
   constructor(
     private uiService: UiService,
     private authService: AuthService,
-    private router: Router,
     private issuesService: IssueService,
   ) {}
 
