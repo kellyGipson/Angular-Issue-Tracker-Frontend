@@ -1,7 +1,7 @@
 import { HttpHeaders } from "@angular/common/http";
 
 
-export const apiUrl = "http://192.168.1.187:8080";
+export const apiUrl = "https://angular-issue-tracker-backend.herokuapp.com";
 
 export const httpOptions = {
   headers: new HttpHeaders({
