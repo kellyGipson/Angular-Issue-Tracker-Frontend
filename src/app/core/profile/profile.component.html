@@ -14,7 +14,11 @@
         <div class="text-center">
           <p class="font-bold text-lg">{{userData.firstName + ' ' + userData.lastName}}</p>
           <p *ngIf="userData.userJobTitle !== ''">{{userData.userJobTitle}}</p>
-          <button (click)="showEditProfile()" class="border p-2 mt-4 rounded-md hover:bg-emerald-700">Edit my profile</button>
+          <button
+            (click)="showEditProfile()"
+            [disabled]="userData.id === 6"
+            class="border p-2 mt-4 rounded-md hover:bg-emerald-700"
+          >Edit my profile</button>
         </div>
       </div>
       <!-- background circles -->

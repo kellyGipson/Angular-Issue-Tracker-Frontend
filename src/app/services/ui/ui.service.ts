@@ -22,6 +22,7 @@ export class UiService {
       case "/issue-tracker/issues": return "Issues";
       case "/issue-tracker/issues/add": return "Issues";
       case "/issue-tracker/group": return "Group";
+      case "/issue-tracker/group/add": return "Group";
       case "/issue-tracker/profile": return "Profile";
     }
     return "Home";

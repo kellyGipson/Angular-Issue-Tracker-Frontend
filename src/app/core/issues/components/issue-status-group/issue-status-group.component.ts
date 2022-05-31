@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import { IFetchIssue } from 'src/app/interfaces/ISSUE';
 
 @Component({
@@ -20,6 +21,3 @@ export class IssueStatusGroupComponent implements OnInit {
     this.onClickIssue.emit(issue);
   }
 }
-
-// this.onSubmitTask.emit(task);
-// @Output() onSubmitTask: EventEmitter<Task> = new EventEmitter();

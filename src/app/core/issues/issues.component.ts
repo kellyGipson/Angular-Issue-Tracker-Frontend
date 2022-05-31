@@ -39,5 +39,4 @@ export class IssuesComponent implements OnInit {
   onClickIssue(issue: IFetchIssue) {
     this.router.navigate(['issue-tracker/issues/', issue.id])
   }
-
 }

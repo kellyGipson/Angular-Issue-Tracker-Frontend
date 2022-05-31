@@ -53,10 +53,11 @@
       >Please create a group to add this issue to.</a>
     </div>
     <input
-      [disabled]="groupsList.length === 0 || issueName === '' || issueMessage === '' || groupAssociated === '' "
+      [disabled]="groupsList.length === 0 || issueName === '' || issueMessage === '' || groupAssociated === '' || userData.id === 6"
       class="bg-emerald-400 text-white underline underline-offset-1 w-full mt-4 p-2 rounded-full disabled:bg-slate-400"
       type="submit"
       value="Create Issue"
     >
+    <p *ngIf="userData.id === 6" class="text-center mt-4">As a guest, you cannot create a group.</p>
   </form>
 </div>

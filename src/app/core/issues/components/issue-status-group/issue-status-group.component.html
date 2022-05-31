@@ -1,5 +1,7 @@
 <div class="flex flex-wrap justify-center items-center text-lg w-screen">
-  <div class="bg-neutral-200 rounded-md w-full max-w-lg mx-4 mb-4">
+  <div
+    class="bg-neutral-200 rounded-md w-full max-w-lg mx-4 mb-4 shadow-md"
+  >
     <h1 class="ml-1 font-bold text-neutral-500">{{name}}
       <span class="text-neutral-400">{{issues.length}}</span>
     </h1>
@@ -7,7 +9,7 @@
     <div
       (click)="onClickIssueEmit(issue)"
       *ngFor="let issue of issues"
-      class="bg-neutral-100 text-neutral-600 font-semibold m-1 p-4"
+      class="cursor-pointer bg-neutral-100 text-neutral-600 font-semibold m-1 p-4"
     >
       <!-- issue name -->
       <h3 class="break-words">{{issue.issueName}}</h3>

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { IssueService } from 'src/app/services/issues/issues.service';
 import { UiService } from 'src/app/services/ui/ui.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-issue-details',
@@ -13,6 +14,7 @@ import { UiService } from 'src/app/services/ui/ui.service';
   styleUrls: ['./issue-details.component.css']
 })
 export class IssueDetailsComponent implements OnInit {
+  userId!: number;
   issueId!: string;
   issue: IFetchIssue = emptyIssue;
   issueNextStatus: "todo" | "inProgress" | "inReview" | "done" = "todo";
@@ -27,10 +29,14 @@ export class IssueDetailsComponent implements OnInit {
     private issuesService: IssueService,
     private uiService: UiService,
     private router: Router,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
     this.uiService.checkLoggedIn();
+    if(this.authService.getId() !== -1) {
+      this.userId = this.authService.getId();
+    }
     this.uiService.activeNavItemSource.next("Add");
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if(id !== null) {
