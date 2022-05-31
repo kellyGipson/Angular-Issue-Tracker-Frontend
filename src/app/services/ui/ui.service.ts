@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
+import { NavMenuInput } from './ui.constants';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +16,7 @@ export class UiService {
 
   constructor(private router: Router) {}
 
-  getActiveNavItem():string {
+  getActiveNavItem(): NavMenuInput {
     switch(window.location.pathname) {
       case "/issue-tracker": return "Home";
       case "/issue-tracker/issues": return "Issues";
@@ -22,10 +24,10 @@ export class UiService {
       case "/issue-tracker/group": return "Group";
       case "/issue-tracker/profile": return "Profile";
     }
-    return "Add";
+    return "Home";
   }
 
-  setActiveNavItem(navItem: "Home" | "Issues" | "Group" | "Profile") {
+  setActiveNavItem(navItem: NavMenuInput) {
     this.activeNavItemSource.next(navItem);
   }
 
@@ -48,9 +50,9 @@ export class UiService {
 
   navigateTo(dest: string, param?:number) {
     if(param) {
-      this.router.navigate([dest, param]);
+      this.router.navigate([dest, param]).then(() => this.setActiveNavItem(this.getActiveNavItem()));
     } else {
-      this.router.navigate([dest]);
+      this.router.navigate([dest]).then(() => this.setActiveNavItem(this.getActiveNavItem()));
     }
   }
 }

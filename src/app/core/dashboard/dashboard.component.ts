@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { ILocalStorageUser, IUser } from 'src/app/interfaces/USER';
 import { IssueService } from 'src/app/services/issues/issues.service';
 import { IFetchIssue } from 'src/app/interfaces/ISSUE';
+import { faTicket, faLayerGroup, faUser, IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-dashboard',
@@ -23,6 +24,11 @@ export class DashboardComponent implements OnInit {
 
   currentTime: number = new Date().getHours();
   timeGreeting!: string;
+
+  // Icons
+  faTicket: IconDefinition = faTicket;
+  faLayerGroup: IconDefinition = faLayerGroup;
+  faUser: IconDefinition = faUser;
 
   constructor(
     private uiService: UiService,
@@ -67,10 +73,12 @@ export class DashboardComponent implements OnInit {
   }
 
   handleCardClick(cardTitle: string): void {
-    let url: string;
+    let url: string = "/";
     switch(cardTitle) {
       case "View All Issues": url = "issue-tracker/issues"; break;
       case "View All Groups": url = "issue-tracker/group"; break;
+      case "View My Profile": url = "issue-tracker/profile"; break;
     }
+    this.uiService.navigateTo(url);
   }
 }

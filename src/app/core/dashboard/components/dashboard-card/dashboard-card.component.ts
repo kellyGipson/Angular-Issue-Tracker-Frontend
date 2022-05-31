@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard-card',
@@ -7,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class DashboardCardComponent implements OnInit {
   @Input() cardTitle!: string;
+  @Input() icon!: IconDefinition;
   @Output() navigateFunction = new EventEmitter<string>();
 
   constructor() { }
@@ -14,7 +16,7 @@ export class DashboardCardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  navigateFunctionEmit(title: string) {
+  navigateFunctionEmit() {
     this.navigateFunction.emit(this.cardTitle);
   }
 }

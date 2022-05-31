@@ -1,8 +1,8 @@
-<main class="mx-4 text-neutral-600">
-  <header class="my-16">
+<main class="w-full flex flex-col justify-center items-center text-neutral-600">
+  <header class="my-16 text-center">
     <h1 class="font-bold text-2xl">{{timeGreeting}} {{firstName}}!</h1>
     <p
-      class="font-semibold text-lg"
+      class="font-semibold text-lg text-neutral-500"
     >
       You have
       {{(todoIssues.length === 0)? "no" : todoIssues.length.toString()}}
@@ -10,21 +10,24 @@
       for today.
     </p>
   </header>
-  <section class="w-full flex flex-grow flex-wrap gap-4 justify-between max-w-lg">
+  <section class="w-[95vw] flex flex-grow flex-wrap gap-4 justify-center max-w-2xl mb-28">
     <app-dashboard-card
       (navigateFunction)="handleCardClick($event)"
       cardTitle="View All Issues"
-      class="basis-auto flex-grow min-w-max"
-    ></app-dashboard-card>
-    <app-dashboard-card
+      class="basis-auto flex-grow min-w-[190px]"
+      [icon]="faTicket"
+      ></app-dashboard-card>
+      <app-dashboard-card
       (navigateFunction)="handleCardClick($event)"
       cardTitle="View All Groups"
-      class="basis-auto flex-grow min-w-max"
-    ></app-dashboard-card>
-    <app-dashboard-card
+      class="basis-auto flex-grow min-w-[190px]"
+      [icon]="faLayerGroup"
+      ></app-dashboard-card>
+      <app-dashboard-card
       (navigateFunction)="handleCardClick($event)"
-      cardTitle="View All Groups"
-      class="basis-auto flex-grow min-w-max"
+      cardTitle="View My Profile"
+      class="basis-auto flex-grow min-w-[190px]"
+      [icon]="faUser"
     ></app-dashboard-card>
   </section>
 </main>
