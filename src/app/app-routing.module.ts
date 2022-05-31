@@ -13,11 +13,6 @@ import { IssueDetailsComponent } from './core/issues/components/issue-details/is
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/issue-tracker',
-    pathMatch: 'full',
-  },
-  {
     path: 'issue-tracker',
     component: DashboardComponent,
   },
@@ -54,7 +49,7 @@ const routes: Routes = [
     component: ProfileComponent,
   },
   {
-    path: '**',
+    path: 'issue-tracker/**',
     component: NotFoundComponent,
   }
 ];
