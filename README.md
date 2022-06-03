@@ -15,11 +15,6 @@ The Issue Tracker was created to:
 - Functional login and register pages
 
 ## To be added:
-- Dashboard Page/Functionality
-- 404 Not Found Page/Functionality
-- Group Page/Functionality
-- Issues Page/Functionality
-- User Profile Page/Functionality
 
 ## Tech Used
 - Angular
